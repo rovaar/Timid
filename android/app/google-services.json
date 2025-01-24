@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "587775296604",
+    "project_id": "timid-17cf8",
+    "storage_bucket": "timid-17cf8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587775296604:android:abb6e14d81765418039299",
+        "android_client_info": {
+          "package_name": "com.example.timid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcMNdZhA4X1fvxMaw2r583prOrlyowVBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
