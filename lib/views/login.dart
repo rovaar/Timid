@@ -65,6 +65,19 @@ class Login extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: 30),
+                Center(
+                  child: Text('- Or sign in with -'),
+                ),
+                SizedBox(height: 20),
+                Center(
+                  child: Image.asset(
+                    'assets/images/GoogleLogo.png',
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ],
             ),
           ),
