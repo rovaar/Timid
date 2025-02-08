@@ -23,13 +23,18 @@ class Login extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       )),
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 80),
                 Text('Login to your account',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     )),
+                const SizedBox(height: 50),
+                TextFormField(
+                    decoration: InputDecoration(
+                  hintText: 'Name',
+                )),
                 const SizedBox(height: 50),
                 TextFormField(
                     decoration: InputDecoration(
