@@ -1,7 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:timid/services/auth_service.dart';
+import 'package:timid/views/home.dart';
+import 'package:timid/views/signup.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final AuthService _authService = AuthService();
+
+  void _signIn() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email.isNotEmpty && password.isNotEmpty) {
+      var user = await _authService.signInWithEmail(email, password);
+      if (user != null) {
+        print("Inicio de sesión exitoso: ${user.email}");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
+      } else {
+        print("Error en inicio de sesión");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +53,7 @@ class Login extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       )),
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 80),
                 Text('Login to your account',
                     style: TextStyle(
                       color: Colors.black,
@@ -32,16 +62,16 @@ class Login extends StatelessWidget {
                     )),
                 const SizedBox(height: 50),
                 TextFormField(
-                    decoration: InputDecoration(
-                  hintText: 'Email',
-                )),
+                  controller: emailController,
+                  decoration: InputDecoration(hintText: 'Email'),
+                ),
                 const SizedBox(height: 50),
                 TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                    )),
-                SizedBox(height: 30),
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(hintText: 'Password'),
+                ),
+                const SizedBox(height: 30),
                 Center(
                   child: Container(
                     width: 200,
@@ -51,27 +81,44 @@ class Login extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: ElevatedButton(
-                      onPressed: () {
-                        print('Formulario enviado');
-                      },
+                      onPressed: _signIn,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                       ),
-                      child: Text(
+                      child: const Text(
                         'Sign in',
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
                 Center(
-                  child: Text('- Or sign in with -'),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Don't have an account?"),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUp()),
+                          );
+                        },
+                        child: const Text(
+                          "Sign up",
+                          style: TextStyle(
+                              color: Colors.blue, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 30),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // Centra los botones
                   children: [
                     ElevatedButton(
                       onPressed: () {
@@ -90,7 +137,7 @@ class Login extends StatelessWidget {
                         height: 40,
                       ),
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: 20), // Espacio entre los botones
                     ElevatedButton(
                       onPressed: () {
                         print('Botón 2 presionado');
@@ -109,7 +156,7 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
+                )
               ],
             ),
           ),
