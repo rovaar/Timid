@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:timid/services/auth_service.dart';
 import 'package:timid/views/home.dart';
 import 'package:timid/views/login.dart';
+import 'package:timid/widgets/button_global.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -82,24 +83,9 @@ class _SignUpState extends State<SignUp> {
                 ),
                 const SizedBox(height: 30),
                 Center(
-                  child: Container(
-                    width: 200,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: _signUp,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                      ),
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
-                    ),
+                  child: ButtonGlobal(
+                    text: "Sign up",
+                    onPressed: _signUp,
                   ),
                 ),
                 Center(
