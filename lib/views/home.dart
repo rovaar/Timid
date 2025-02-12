@@ -5,6 +5,7 @@ import 'package:timid/views/people.dart';
 import 'package:timid/views/profile.dart';
 import 'package:timid/views/chats.dart';
 import 'package:timid/widgets/bottom_nav_bar.dart';
+import 'package:timid/widgets/top_nav_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,14 +22,6 @@ class HomeState extends State<Home> {
     const PeopleScreen(),
     const ChatsScreen(),
   ];
-
-  void logout() async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const Login()),
-    );
-  }
 
   void onItemTapped(int index) {
     setState(() {

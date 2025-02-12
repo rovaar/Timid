@@ -12,12 +12,14 @@ class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       title: Text(text),
-      actions: [
-        IconButton(
-          icon: Icon(icon),
-          onPressed: () => onPressed,
-        ),
-      ],
+      actions: icon != null
+          ? [
+              IconButton(
+                icon: Icon(icon),
+                onPressed: onPressed,
+              ),
+            ]
+          : null,
     );
   }
 
