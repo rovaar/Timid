@@ -7,10 +7,10 @@ class PeopleScreen extends StatefulWidget {
   const PeopleScreen({super.key});
 
   @override
-  State<PeopleScreen> createState() => _PeopleScreenState();
+  State<PeopleScreen> createState() => PeopleScreenState();
 }
 
-class _PeopleScreenState extends State<PeopleScreen> {
+class PeopleScreenState extends State<PeopleScreen> {
   void logout() async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(

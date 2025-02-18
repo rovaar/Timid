@@ -8,20 +8,20 @@ class Login extends StatefulWidget {
   const Login({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Login> createState() => LoginState();
 }
 
-class _LoginState extends State<Login> {
+class LoginState extends State<Login> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final AuthService _authService = AuthService();
+  final AuthService authService = AuthService();
 
-  void _signIn() async {
+  void signIn() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
     if (email.isNotEmpty && password.isNotEmpty) {
-      var user = await _authService.signInWithEmail(email, password);
+      var user = await authService.signInWithEmail(email, password);
       if (user != null) {
         print("Inicio de sesión exitoso: ${user.email}");
         Navigator.pushReplacement(
@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
                 Center(
                   child: ButtonGlobal(
                     text: "Sign in",
-                    onPressed: _signIn,
+                    onPressed: signIn,
                   ),
                 ),
                 Center(

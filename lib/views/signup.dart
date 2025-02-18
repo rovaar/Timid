@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/auth_service.dart';
-import 'package:timid/views/home.dart';
 import 'package:timid/views/login.dart';
+import 'package:timid/views/register_name.dart';
 import 'package:timid/widgets/button_global.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUp> createState() => SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
-  final TextEditingController userNameController = TextEditingController();
+class SignUpState extends State<SignUp> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final AuthService _authService = AuthService();
+  final AuthService authService = AuthService();
 
-  void _signUp() async {
-    String username = userNameController.text.trim();
+  void signUp() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    if (username.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
-      var user = await _authService.signUpWithEmail(email, password, username);
+    if (email.isNotEmpty && password.isNotEmpty) {
+      var user = await authService.signUpWithEmail(email, password);
       if (user != null) {
         //FirebaseFirestore.instance.collection('users').doc(user.uid).get();
         print("Registro exitoso: ${user.email}");
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const Home()),
+          MaterialPageRoute(builder: (context) => const RegisterName()),
         );
       } else {
         print("Error en registro");
@@ -66,12 +64,6 @@ class _SignUpState extends State<SignUp> {
                     )),
                 const SizedBox(height: 50),
                 TextFormField(
-                    controller: userNameController,
-                    decoration: InputDecoration(
-                      hintText: 'Username',
-                    )),
-                const SizedBox(height: 50),
-                TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(hintText: 'Email'),
                 ),
@@ -85,7 +77,7 @@ class _SignUpState extends State<SignUp> {
                 Center(
                   child: ButtonGlobal(
                     text: "Sign up",
-                    onPressed: _signUp,
+                    onPressed: signUp,
                   ),
                 ),
                 Center(
@@ -102,7 +94,7 @@ class _SignUpState extends State<SignUp> {
                           );
                         },
                         child: const Text(
-                          "Sign up",
+                          "Sign in",
                           style: TextStyle(
                               color: Colors.blue, fontWeight: FontWeight.bold),
                         ),

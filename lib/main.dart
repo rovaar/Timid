@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:timid/views/register_name.dart';
 import 'package:timid/views/splashView.dart';
 import 'services/firebase_options.dart';
 
