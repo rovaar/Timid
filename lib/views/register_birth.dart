@@ -1,30 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/user_service.dart';
 import 'package:timid/views/register_gender.dart';
-import 'package:timid/widgets/button_global.dart';
 
 class RegisterBirth extends StatefulWidget {
-  const RegisterBirth({super.key});
-
   @override
-  State<RegisterBirth> createState() => _RegisterBirth();
+  _RegisterBirthState createState() => _RegisterBirthState();
 }
 
-class _RegisterBirth extends State<RegisterBirth> {
+class _RegisterBirthState extends State<RegisterBirth> {
   final TextEditingController userBirthController = TextEditingController();
   final RegisterProfile registerProfile = RegisterProfile();
+  DateTime? selectedDate;
+
+  Future<void> selectDate(BuildContext context) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        selectedDate = pickedDate;
+        userBirthController.text =
+            "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+      });
+    }
+  }
 
   void goToNextPage() {
-    String birth = userBirthController.text.trim();
-
-    if (birth.isNotEmpty) {
-      registerProfile.saveBirth(birth);
+    if (selectedDate != null) {
+      registerProfile.saveBirth(selectedDate);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const RegisterGender()),
+        MaterialPageRoute(builder: (context) => RegisterGender()),
       );
     } else {
-      print('Erroe comps');
+      print("Por favor, ingresa tu fecha de nacimiento");
     }
   }
 
@@ -50,10 +63,14 @@ class _RegisterBirth extends State<RegisterBirth> {
                     ),
                   ),
                   const SizedBox(height: 35),
-                  TextFormField(
+                  TextField(
                     controller: userBirthController,
+                    readOnly: true,
                     decoration: InputDecoration(
-                        hintText: 'Introduce tu fecha de nacimiento'),
+                      hintText: 'Selecciona tu fecha de nacimiento',
+                      suffixIcon: Icon(Icons.calendar_today),
+                    ),
+                    onTap: () => selectDate(context),
                   ),
                   const SizedBox(height: 20),
                   Text('Así es como se mostrará en tu perfil.'),
@@ -61,9 +78,11 @@ class _RegisterBirth extends State<RegisterBirth> {
               ),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 1230),
-                  child:
-                      ButtonGlobal(text: 'Siguiente', onPressed: goToNextPage),
+                  padding: const EdgeInsets.only(bottom: 40),
+                  child: ElevatedButton(
+                    onPressed: goToNextPage,
+                    child: Text('Siguiente'),
+                  ),
                 ),
               ),
             ],

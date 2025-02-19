@@ -18,12 +18,24 @@ class RegisterProfile {
     }
   }
 
-  Future<void> saveBirth(String birth) async {
+  Future<void> saveBirth(DateTime? birthDate) async {
     User? user = auth.currentUser;
 
     if (user != null) {
       await firestore.collection('users').doc(user.uid).set({
-        'birth': birth,
+        'birthDate': Timestamp.fromDate(birthDate!),
+      }, SetOptions(merge: true));
+    } else {
+      print("No hay ningún usuario autenticado.");
+    }
+  }
+
+  Future<void> saveGender(String gender) async {
+    User? user = auth.currentUser;
+
+    if (user != null) {
+      await firestore.collection('users').doc(user.uid).set({
+        'gender': gender,
       }, SetOptions(merge: true));
     } else {
       print("No hay ningún usuario autenticado.");
