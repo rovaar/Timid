@@ -123,7 +123,7 @@ class LoginState extends State<Login> {
                         height: 40,
                       ),
                     ),
-                    SizedBox(width: 20), // Espacio entre los botones
+                    SizedBox(width: 20),
                     ElevatedButton(
                       onPressed: () {
                         print('Botón 2 presionado');

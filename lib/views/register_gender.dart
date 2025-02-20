@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/user_service.dart';
-import 'package:timid/views/home.dart';
+import 'package:timid/views/register_photos.dart';
 import 'package:timid/widgets/button_global.dart';
 
 class RegisterGender extends StatefulWidget {
@@ -21,10 +21,12 @@ class _RegisterGenderState extends State<RegisterGender> {
       registerProfile.saveGender(selectedGender!);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const Home()),
+        MaterialPageRoute(builder: (context) => RegisterPhotos()),
       );
     } else {
-      print('Por favor, selecciona un género.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Debes selecionar una opcion')),
+      );
     }
   }
 

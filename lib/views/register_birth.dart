@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/user_service.dart';
 import 'package:timid/views/register_gender.dart';
+import 'package:timid/widgets/button_global.dart';
 
 class RegisterBirth extends StatefulWidget {
   @override
@@ -79,9 +80,9 @@ class _RegisterBirthState extends State<RegisterBirth> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 40),
-                  child: ElevatedButton(
+                  child: ButtonGlobal(
+                    text: 'Siguiente',
                     onPressed: goToNextPage,
-                    child: Text('Siguiente'),
                   ),
                 ),
               ),
