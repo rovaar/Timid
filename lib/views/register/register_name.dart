@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timid/views/register_birth.dart';
+import 'package:timid/views/register/register_birth.dart';
 import 'package:timid/widgets/button_global.dart';
 import 'package:timid/services/user_service.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:timid/views/home.dart';
-import 'package:timid/views/login.dart';
+import 'package:timid/views/register/initialscreen.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -25,8 +25,8 @@ class _SplashViewState extends State<SplashView> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const Home()));
     } else {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Login()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const Initialscreen()));
     }
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/auth_service.dart';
 import 'package:timid/views/home.dart';
-import 'package:timid/views/signup.dart';
+import 'package:timid/views/register/signup.dart';
 import 'package:timid/widgets/button_global.dart';
 
 class Login extends StatefulWidget {
@@ -103,8 +103,7 @@ class LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 30),
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Centra los botones
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
                       onPressed: () {

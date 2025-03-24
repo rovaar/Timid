@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:timid/services/user_service.dart';
 import 'dart:io';
 import 'package:timid/views/home.dart';
 import 'package:timid/widgets/button_global.dart';
@@ -11,14 +12,22 @@ class RegisterPhotos extends StatefulWidget {
 
 class _RegisterPhotosState extends State<RegisterPhotos> {
   final ImagePicker picker = ImagePicker();
+  RegisterProfile registerProfile = RegisterProfile();
   List<File?> images = List.filled(6, null);
 
   Future<void> pickImage(int index) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
+    print("pickImage() ha sido llamado para index: $index");
+
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      File imageFile = File(image.path);
+
       setState(() {
-        images[index] = File(pickedFile.path);
+        images[index] = imageFile;
       });
+    } else {
+      print("No se seleccionó ninguna imagen.");
     }
   }
 
@@ -28,7 +37,7 @@ class _RegisterPhotosState extends State<RegisterPhotos> {
     });
   }
 
-  void goToNextPage() {
+  Future<void> goToNextPage() async {
     int selectedImagesCount = images.where((image) => image != null).length;
 
     if (selectedImagesCount < 3) {
@@ -37,6 +46,18 @@ class _RegisterPhotosState extends State<RegisterPhotos> {
       );
       return;
     }
+
+    List<String> uploadedImageUrls = [];
+    for (File? image in images) {
+      if (image != null) {
+        String? imageUrl = await registerProfile.uploadProfileImage(image);
+        if (imageUrl != null) {
+          uploadedImageUrls.add(imageUrl);
+        }
+      }
+    }
+
+    await registerProfile.saveUserImages(uploadedImageUrls);
 
     Navigator.pushReplacement(
       context,
@@ -116,8 +137,7 @@ class _RegisterPhotosState extends State<RegisterPhotos> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20),
-                  child:
-                      ButtonGlobal(text: 'Siguiente', onPressed: goToNextPage),
+                  child: ButtonGlobal(text: 'Guardar', onPressed: goToNextPage),
                 ),
               ),
             ],

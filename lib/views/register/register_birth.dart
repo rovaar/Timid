@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/user_service.dart';
-import 'package:timid/views/register_gender.dart';
+import 'package:timid/views/register/register_gender.dart';
 import 'package:timid/widgets/button_global.dart';
 
 class RegisterBirth extends StatefulWidget {

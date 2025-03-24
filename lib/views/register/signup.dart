@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/auth_service.dart';
-import 'package:timid/views/login.dart';
-import 'package:timid/views/register_name.dart';
+import 'package:timid/views/register/login.dart';
+import 'package:timid/views/register/register_name.dart';
 import 'package:timid/widgets/button_global.dart';
 
 class SignUp extends StatefulWidget {

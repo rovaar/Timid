@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timid/views/people.dart';
-import 'package:timid/views/profile.dart';
+import 'package:timid/views/user_profile/profile.dart';
 import 'package:timid/views/chats.dart';
 import 'package:timid/widgets/bottom_nav_bar.dart';
 
