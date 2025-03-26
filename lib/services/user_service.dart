@@ -45,6 +45,20 @@ class RegisterProfile {
     }
   }
 
+  //GET USER
+
+  User? getCurrentUser() {
+    return auth.currentUser;
+  }
+
+  String? getCurrentUserId() {
+    return auth.currentUser?.uid;
+  }
+
+  String? getCurrentUserEmail() {
+    return auth.currentUser?.email;
+  }
+
   Future<String?> uploadProfileImage(File imageFile) async {
     User? user = auth.currentUser;
 
