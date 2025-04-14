@@ -5,7 +5,6 @@ class EncountersService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  /// Registra un encuentro entre dos usuarios, sin duplicados
   Future<void> registerEncounter(String userId1, String userId2) async {
     List<String> sortedIds = [userId1, userId2]..sort();
     String encounterId = sortedIds.join("_");
