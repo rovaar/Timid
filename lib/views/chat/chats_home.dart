@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:timid/services/chat_service.dart';
+import 'package:timid/services/encounters_service.dart';
 import 'package:timid/views/chat/chat.dart';
 import 'package:timid/widgets/top_nav_bar.dart';
 
@@ -14,9 +15,25 @@ class ChatsHomeScreen extends StatefulWidget {
 
 class _ChatsHomeScreenState extends State<ChatsHomeScreen> {
   final TextEditingController messageController = TextEditingController();
-  final ChatSerivece chatService = ChatSerivece();
+  final ChatService chatService = ChatService();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  final EncountersService encounterService = EncountersService();
+
+  List<String> matchedUserIds = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadMatchedUsers();
+  }
+
+  Future<void> loadMatchedUsers() async {
+    final myUserId = FirebaseAuth.instance.currentUser!.uid;
+    List<String> users = await encounterService.getMatchedUserIds(myUserId);
+    setState(() {
+      matchedUserIds = users;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,54 +41,54 @@ class _ChatsHomeScreenState extends State<ChatsHomeScreen> {
       appBar: TopNavBar(
         text: "Chats",
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: UserList(),
-          ),
-        ],
-      ),
+      body: matchedUserIds.isEmpty
+          ? const Center(child: Text("No tienes matches aún"))
+          : StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('users').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                // Filtrar usuarios por match
+                var matchedUsers = snapshot.data!.docs.where((doc) {
+                  return matchedUserIds.contains(doc.id);
+                }).toList();
+
+                return ListView.builder(
+                  itemCount: matchedUsers.length,
+                  itemBuilder: (context, index) {
+                    var userDoc = matchedUsers[index];
+                    var data = userDoc.data() as Map<String, dynamic>;
+
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(data['profileImageUrl'] ?? ''),
+                      ),
+                      title: Text(data['name'] ?? 'Sin nombre'),
+                      subtitle: Text(data['email'] ?? ''),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChatScreen(
+                              receiverUserEmail: data['email'],
+                              receiverUserID: userDoc.id,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
     );
-  }
-
-  Widget UserList() {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('users').snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('loading...');
-        }
-
-        return ListView(
-          children: snapshot.data!.docs
-              .map<Widget>((doc) => buildUserListItem(doc))
-              .toList(),
-        );
-      },
-    );
-  }
-
-  Widget buildUserListItem(DocumentSnapshot document) {
-    Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
-    if (data == null) return const SizedBox();
-
-    if (auth.currentUser!.email != data['email']) {
-      return ListTile(
-          title: Text(data['email']),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                        receiverUserEmail: data['email'],
-                        receiverUserID: data['uid'])));
-          });
-    } else {
-      return Container();
-    }
   }
 }

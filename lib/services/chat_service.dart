@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:timid/model/message.dart';
 
-class ChatSerivece extends ChangeNotifier {
+class ChatService extends ChangeNotifier {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -13,6 +13,7 @@ class ChatSerivece extends ChangeNotifier {
     final String currentUserId = firebaseAuth.currentUser!.uid;
     final String currentUserEmail = firebaseAuth.currentUser!.email.toString();
     final Timestamp timestamp = Timestamp.now();
+
     //create new message
     Message newMessage = Message(
         senderId: currentUserId,
@@ -22,10 +23,7 @@ class ChatSerivece extends ChangeNotifier {
         timestamp: timestamp);
 
     //construct chat toom id from current user id and reciver id
-    List<String> ids = [currentUserId, receiverId];
-    print(receiverId);
-    ids.sort();
-    String chatRoomId = ids.join("_");
+    String chatRoomId = getChatRoomId(currentUserId, receiverId);
 
     //add new message to database
     await firestore
@@ -37,9 +35,7 @@ class ChatSerivece extends ChangeNotifier {
 
   //get messages
   Stream<QuerySnapshot> getMessages(String userId, String otherUserId) {
-    List<String> ids = [userId, otherUserId];
-    ids.sort();
-    String chatRoomId = ids.join("_");
+    String chatRoomId = getChatRoomId(userId, otherUserId);
 
     return firestore
         .collection('chat_rooms')
@@ -47,5 +43,11 @@ class ChatSerivece extends ChangeNotifier {
         .collection('messages')
         .orderBy('timestamp', descending: false)
         .snapshots();
+  }
+
+  String getChatRoomId(String userId1, String userId2) {
+    List<String> ids = [userId1, userId2];
+    ids.sort();
+    return ids.join("_");
   }
 }
