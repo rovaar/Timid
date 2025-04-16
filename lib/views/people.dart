@@ -44,9 +44,7 @@ class PeopleScreenState extends State<PeopleScreen> {
         usersData.add({
           'id': userDoc.id,
           'name': userDoc['name'] ?? '',
-          'photoUrl': userDoc['images'] != null && userDoc['images'].isNotEmpty
-              ? userDoc['images'][0]
-              : null,
+          'images': userDoc['images'] ?? [],
         });
       }
     }
@@ -56,7 +54,74 @@ class PeopleScreenState extends State<PeopleScreen> {
     });
   }
 
-  void goToProfile() {}
+  void showUserProfileModal(Map<String, dynamic> user) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        List<dynamic> images = user['images'] ?? [];
+        if (images.isEmpty && user['photoUrl'] != null) {
+          images = [user['photoUrl']];
+        }
+
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: SizedBox(
+            height: 650,
+            width: 300,
+            child: Column(
+              children: [
+                // Botones de acción arriba
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.red),
+                        onPressed: () {
+                          // Acción para rechazar
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      Text(
+                        user['name'] ?? 'No name',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.favorite, color: Colors.green),
+                        onPressed: () async {
+                          // Acción para hacer match
+                          await encounterService.markAsMatched(user['id']);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(),
+                // Galería de imágenes vertical
+                Expanded(
+                  child: PageView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: images.length,
+                    itemBuilder: (context, index) {
+                      return Image.network(
+                        images[index],
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) =>
+                            const Icon(Icons.image_not_supported),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   void logout() async {
     await FirebaseAuth.instance.signOut();
@@ -74,31 +139,41 @@ class PeopleScreenState extends State<PeopleScreen> {
           icon: Icons.logout,
           onPressed: logout,
         ),
-        body: Column(
-          children: encounteredUsers.map((user) {
-            return GestureDetector(
-              onTap: () {
-                // puedes abrir su perfil aquí si quieres
-              },
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: user['photoUrl'] != null
-                        ? NetworkImage(user['photoUrl'])
-                        : AssetImage("assets/images/default_avatar.png")
-                            as ImageProvider,
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    user['name'] ?? '',
-                    style: TextStyle(fontSize: 12),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            );
-          }).toList(),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: encounteredUsers.isEmpty
+              ? const Center(child: Text("No encountered users yet."))
+              : GridView.count(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 16.0,
+                  mainAxisSpacing: 16.0,
+                  children: encounteredUsers.map((user) {
+                    return GestureDetector(
+                      onTap: () {
+                        showUserProfileModal(user);
+                      },
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: (user['images'] != null &&
+                                    user['images'].isNotEmpty)
+                                ? NetworkImage(user['images'][0])
+                                : const AssetImage(
+                                        "assets/images/default_avatar.png")
+                                    as ImageProvider,
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            user['name'] ?? '',
+                            style: const TextStyle(fontSize: 12),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
         ));
   }
 }

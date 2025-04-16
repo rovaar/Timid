@@ -60,4 +60,15 @@ class EncountersService {
 
     return matchedUserIds;
   }
+
+  Future<void> markAsMatched(String otherUserId) async {
+    final myUserId = FirebaseAuth.instance.currentUser!.uid;
+    List<String> sortedIds = [myUserId, otherUserId]..sort();
+    String encounterId = sortedIds.join("_");
+
+    await FirebaseFirestore.instance
+        .collection('encounters')
+        .doc(encounterId)
+        .update({'matched': true});
+  }
 }
