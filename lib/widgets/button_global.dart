@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timid/theme/global_colors.dart';
 
 class ButtonGlobal extends StatelessWidget {
   final String text;
@@ -16,7 +17,7 @@ class ButtonGlobal extends StatelessWidget {
       width: 200,
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: AppColors.accent,
         borderRadius: BorderRadius.circular(50),
       ),
       child: ElevatedButton(

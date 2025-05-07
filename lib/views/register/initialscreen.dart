@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:timid/services/auth_service.dart';
-import 'package:timid/views/home.dart';
 import 'package:timid/views/register/login.dart';
 import 'package:timid/views/register/signup.dart';
 import 'package:timid/widgets/button_global.dart';
+import 'package:timid/theme/global_colors.dart';
 
 class Initialscreen extends StatefulWidget {
   const Initialscreen({super.key});

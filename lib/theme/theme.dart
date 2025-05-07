@@ -4,8 +4,9 @@ import 'global_colors.dart';
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
+      fontFamily: 'Roboto',
       primaryColor: AppColors.primary,
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: AppColors.primary,
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
         secondary: AppColors.accent,
