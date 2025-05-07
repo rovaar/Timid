@@ -35,25 +35,28 @@ class InitialscreenState extends State<Initialscreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     alignment: Alignment.center,
-                    child: Text(
-                      'LOGO',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Image.asset(
+                      'assets/images/LogoText.png',
+                      width: 150,
+                      height: 150,
                     ),
                   ),
                   const SizedBox(height: 80),
+                  Image.asset(
+                    'assets/images/PeopleKiss.png',
+                    width: 150,
+                    height: 150,
+                  ),
+                  const SizedBox(height: 80),
                   Text(
-                    'Login to your account',
+                    'Benveniguts a Timid!',
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
+                      color: Colors.white,
+                      fontSize: 36,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -73,7 +76,7 @@ class InitialscreenState extends State<Initialscreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
             ],
           ),
         ),

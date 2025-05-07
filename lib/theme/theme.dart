@@ -18,7 +18,9 @@ class AppTheme {
         foregroundColor: AppColors.white,
       ),
       textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: AppColors.textDark),
+        bodyLarge: TextStyle(color: AppColors.white),
+        bodySmall: TextStyle(color: AppColors.white),
+        bodyMedium: TextStyle(color: AppColors.white),
         titleLarge: TextStyle(fontWeight: FontWeight.bold),
       ),
       iconTheme: IconThemeData(color: AppColors.accent),

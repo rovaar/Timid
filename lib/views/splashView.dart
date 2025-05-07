@@ -42,7 +42,7 @@ class _SplashViewState extends State<SplashView> {
               'assets/images/LogoText.png',
               width: 350,
               height: 350,
-            ), // Añade espacio si deseas entre elementos
+            ),
           ],
         ),
       ),
