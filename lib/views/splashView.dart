@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:timid/theme/global_colors.dart';
 import 'package:timid/views/home.dart';
 import 'package:timid/views/register/initialscreen.dart';
 
@@ -14,7 +15,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    //_checkUserStatus();
+    _checkUserStatus();
   }
 
   void _checkUserStatus() async {
@@ -33,7 +34,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(13, 168, 177, 1),
+      backgroundColor: AppColors.primary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center, // Centra verticalmente
@@ -42,8 +43,7 @@ class _SplashViewState extends State<SplashView> {
               'assets/images/LogoText.png',
               width: 350,
               height: 350,
-            ),
-            SizedBox(height: 20), // Añade espacio si deseas entre elementos
+            ), // Añade espacio si deseas entre elementos
           ],
         ),
       ),
