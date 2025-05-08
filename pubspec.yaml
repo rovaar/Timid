@@ -32,7 +32,7 @@ flutter_launcher_icons:
   ios: true
   image_path_android: "assets/images/LogoTimid.png"
   image_path_ios: "assets/images/LogoTimid.png"
-  adaptive_icon_background: "#0xFF0DA8B1"  
+  adaptive_icon_background: "@color/ic_launcher_background"  
   adaptive_icon_foreground: "assets/images/Logo.png"
 
 

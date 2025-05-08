@@ -3,6 +3,7 @@ import 'package:timid/services/auth_service.dart';
 import 'package:timid/views/home.dart';
 import 'package:timid/views/register/signup.dart';
 import 'package:timid/widgets/button_global.dart';
+import 'package:timid/theme/global_colors.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -47,13 +48,26 @@ class LoginState extends State<Login> {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  child: Text('TIMID',
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                      )),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(width: 10),
+                      const Text(
+                        'TIMID',
+                        style: TextStyle(
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Image.asset(
+                        'assets/images/LogoTimid.png',
+                        width: 45,
+                        height: 45,
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 80),
+                const SizedBox(height: 150),
                 Text('Login to your account',
                     style: TextStyle(
                       //color: AppColors.accent,
@@ -64,15 +78,14 @@ class LoginState extends State<Login> {
                 const SizedBox(height: 50),
                 TextFormField(
                   controller: emailController,
-                  obscureText: true,
                   style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
-                    hintText: 'Email',
-                    hintStyle: TextStyle(color: Colors.white70),
+                    labelText: 'Email',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(12)), // <-- redondeado
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
@@ -89,12 +102,12 @@ class LoginState extends State<Login> {
                   obscureText: true,
                   style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
-                    hintText: 'Password',
-                    hintStyle: TextStyle(color: Colors.white70),
+                    labelText: 'Contrassenya',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(12)), // <-- redondeado
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
@@ -128,7 +141,8 @@ class LoginState extends State<Login> {
                         child: const Text(
                           "Sign up",
                           style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                              color: AppColors.accent,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],

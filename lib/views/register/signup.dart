@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/auth_service.dart';
+import 'package:timid/theme/global_colors.dart';
 import 'package:timid/views/register/login.dart';
 import 'package:timid/views/register/register_name.dart';
 import 'package:timid/widgets/button_global.dart';
@@ -48,30 +49,73 @@ class SignUpState extends State<SignUp> {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  child: Text('LOGO',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                      )),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(width: 10),
+                      const Text(
+                        'TIMID',
+                        style: TextStyle(
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Image.asset(
+                        'assets/images/LogoTimid.png',
+                        width: 45,
+                        height: 45,
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 80),
+                const SizedBox(height: 150),
                 Text('Create a new account',
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 26,
                       fontWeight: FontWeight.w500,
                     )),
                 const SizedBox(height: 50),
                 TextFormField(
                   controller: emailController,
-                  decoration: InputDecoration(hintText: 'Email'),
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 50),
                 TextFormField(
                   controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(hintText: 'Password'),
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    labelText: 'Contrassenya',
+                    labelStyle: TextStyle(color: Colors.white70),
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 30),
                 Center(
@@ -96,7 +140,8 @@ class SignUpState extends State<SignUp> {
                         child: const Text(
                           "Sign in",
                           style: TextStyle(
-                              color: Colors.blue, fontWeight: FontWeight.bold),
+                              color: AppColors.accent,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
