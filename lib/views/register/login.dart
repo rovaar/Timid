@@ -47,9 +47,8 @@ class LoginState extends State<Login> {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  child: Text('LOGO',
+                  child: Text('TIMID',
                       style: TextStyle(
-                        color: Colors.blue,
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
                       )),
@@ -57,20 +56,54 @@ class LoginState extends State<Login> {
                 const SizedBox(height: 80),
                 Text('Login to your account',
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
+                      //color: AppColors.accent,
+                      color: Colors.white,
+                      fontSize: 26,
                       fontWeight: FontWeight.w500,
                     )),
                 const SizedBox(height: 50),
                 TextFormField(
                   controller: emailController,
-                  decoration: InputDecoration(hintText: 'Email'),
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    hintText: 'Email',
+                    hintStyle: TextStyle(color: Colors.white70),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(12)), // <-- redondeado
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 50),
                 TextFormField(
                   controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(hintText: 'Password'),
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    hintText: 'Password',
+                    hintStyle: TextStyle(color: Colors.white70),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(12)), // <-- redondeado
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 30),
                 Center(
@@ -95,7 +128,7 @@ class LoginState extends State<Login> {
                         child: const Text(
                           "Sign up",
                           style: TextStyle(
-                              color: Colors.blue, fontWeight: FontWeight.bold),
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],

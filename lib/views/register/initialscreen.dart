@@ -46,12 +46,6 @@ class InitialscreenState extends State<Initialscreen> {
                     ),
                   ),
                   const SizedBox(height: 80),
-                  Image.asset(
-                    'assets/images/PeopleKiss.png',
-                    width: 150,
-                    height: 150,
-                  ),
-                  const SizedBox(height: 80),
                   Text(
                     'Benveniguts a Timid!',
                     style: TextStyle(

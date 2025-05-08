@@ -5,7 +5,7 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       fontFamily: 'Roboto',
-      primaryColor: AppColors.primary,
+      primaryColor: const Color(0xFF0DA8B1),
       scaffoldBackgroundColor: AppColors.primary,
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
@@ -21,7 +21,8 @@ class AppTheme {
         bodyLarge: TextStyle(color: AppColors.white),
         bodySmall: TextStyle(color: AppColors.white),
         bodyMedium: TextStyle(color: AppColors.white),
-        titleLarge: TextStyle(fontWeight: FontWeight.bold),
+        titleLarge:
+            TextStyle(fontWeight: FontWeight.bold, color: AppColors.white),
       ),
       iconTheme: IconThemeData(color: AppColors.accent),
       elevatedButtonTheme: ElevatedButtonThemeData(

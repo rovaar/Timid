@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:timid/theme/global_colors.dart';
 import 'package:timid/views/home.dart';
 import 'package:timid/views/register/initialscreen.dart';
 
