@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:timid/services/chat_service.dart';
+import 'package:timid/theme/global_colors.dart';
 import 'package:timid/widgets/chat_bubble.dart';
 import 'package:timid/widgets/top_nav_bar.dart';
+import 'package:timid/services/image_service.dart';
 
 class ChatScreen extends StatefulWidget {
   final String receiverUserEmail;
@@ -23,6 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController messageController = TextEditingController();
   final ChatService chatService = ChatService();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  Map<String, dynamic>? user;
 
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
@@ -33,10 +36,65 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    loadReceiverUserData();
+  }
+
+  Future<void> loadReceiverUserData() async {
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.receiverUserID)
+        .get();
+
+    if (doc.exists) {
+      setState(() {
+        user = doc.data();
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopNavBar(
-        text: "Chats",
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: AppColors.primary,
+          elevation: 0,
+          flexibleSpace: SafeArea(
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                if (user != null)
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundImage:
+                            ImageService.getUserAvatar(user!['images']),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        user!['name'] ?? '',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  const CircularProgressIndicator(),
+              ],
+            ),
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -94,10 +152,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: (data['senderId'] == firebaseAuth.currentUser!.uid)
               ? MainAxisAlignment.end
               : MainAxisAlignment.start,
-          children: [
-            Text(data['senderEmail']),
-            ChatBubble(message: data['message'])
-          ],
+          children: [ChatBubble(message: data['message'])],
         ),
       ),
     );
@@ -107,17 +162,34 @@ class _ChatScreenState extends State<ChatScreen> {
     return Row(
       children: [
         Expanded(
-          child: TextField(
-            controller: messageController,
-            decoration: InputDecoration(hintText: 'Email'),
-            obscureText: false,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: messageController,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                hintText: 'Escriu un missatge',
+                hintStyle: TextStyle(color: Colors.white70),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+              ),
+            ),
           ),
         ),
         IconButton(
           onPressed: sendMessage,
           icon: const Icon(
-            Icons.arrow_upward,
-            size: 40,
+            Icons.send,
+            size: 30,
           ),
         )
       ],

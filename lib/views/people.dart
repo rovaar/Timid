@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:timid/services/encounters_service.dart';
 import 'package:timid/services/user_service.dart';
 import 'package:timid/views/register/initialscreen.dart';
-import 'package:timid/views/user_profile/profileImages.dart';
 import 'package:timid/widgets/top_nav_bar.dart';
+import 'package:timid/services/image_service.dart';
 
 class PeopleScreen extends StatefulWidget {
   const PeopleScreen({super.key});
@@ -156,12 +156,8 @@ class PeopleScreenState extends State<PeopleScreen> {
                         children: [
                           CircleAvatar(
                             radius: 40,
-                            backgroundImage: (user['images'] != null &&
-                                    user['images'].isNotEmpty)
-                                ? NetworkImage(user['images'][0])
-                                : const AssetImage(
-                                        "assets/images/default_avatar.png")
-                                    as ImageProvider,
+                            backgroundImage:
+                                ImageService.getUserAvatar(user['images']),
                           ),
                           const SizedBox(height: 6),
                           Text(

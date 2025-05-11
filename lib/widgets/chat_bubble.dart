@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timid/theme/global_colors.dart';
 
 class ChatBubble extends StatelessWidget {
   final String message;
@@ -10,7 +11,7 @@ class ChatBubble extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.blue,
+        color: AppColors.accent,
       ),
       child: Text(
         message,

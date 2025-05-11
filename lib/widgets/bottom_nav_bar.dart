@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timid/theme/global_colors.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -12,8 +13,8 @@ class BottomNavBar extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor: AppColors.accent,
+      unselectedItemColor: AppColors.primary,
       showUnselectedLabels: false,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),

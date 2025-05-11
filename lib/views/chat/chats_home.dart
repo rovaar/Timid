@@ -5,6 +5,7 @@ import 'package:timid/services/chat_service.dart';
 import 'package:timid/services/encounters_service.dart';
 import 'package:timid/views/chat/chat.dart';
 import 'package:timid/widgets/top_nav_bar.dart';
+import 'package:timid/services/image_service.dart';
 
 class ChatsHomeScreen extends StatefulWidget {
   const ChatsHomeScreen({super.key});
@@ -64,21 +65,22 @@ class _ChatsHomeScreenState extends State<ChatsHomeScreen> {
                   itemCount: matchedUsers.length,
                   itemBuilder: (context, index) {
                     var userDoc = matchedUsers[index];
-                    var data = userDoc.data() as Map<String, dynamic>;
+                    var user = userDoc.data() as Map<String, dynamic>;
 
                     return ListTile(
                       leading: CircleAvatar(
+                        radius: 40,
                         backgroundImage:
-                            NetworkImage(data['profileImageUrl'] ?? ''),
+                            ImageService.getUserAvatar(user['images']),
                       ),
-                      title: Text(data['name'] ?? 'Sin nombre'),
-                      subtitle: Text(data['email'] ?? ''),
+                      title: Text(user['name'] ?? 'Sin nombre'),
+                      subtitle: Text(user['email'] ?? ''),
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => ChatScreen(
-                              receiverUserEmail: data['email'],
+                              receiverUserEmail: user['email'],
                               receiverUserID: userDoc.id,
                             ),
                           ),
