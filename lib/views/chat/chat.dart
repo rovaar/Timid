@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:timid/services/chat_service.dart';
 import 'package:timid/theme/global_colors.dart';
 import 'package:timid/widgets/chat_bubble.dart';
-import 'package:timid/widgets/top_nav_bar.dart';
 import 'package:timid/services/image_service.dart';
+import 'package:timid/services/encounters_service.dart';
 
 class ChatScreen extends StatefulWidget {
   final String receiverUserEmail;
@@ -24,6 +24,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController messageController = TextEditingController();
   final ChatService chatService = ChatService();
+  final EncountersService encounterService = EncountersService();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   Map<String, dynamic>? user;
 
@@ -48,9 +49,14 @@ class _ChatScreenState extends State<ChatScreen> {
         .get();
 
     if (doc.exists) {
+      final data = doc.data();
+      data!['id'] = doc.id;
+      print("Datos del usuario receptor: $data");
       setState(() {
-        user = doc.data();
+        user = data;
       });
+    } else {
+      print("No se encontró el documento del usuario receptor.");
     }
   }
 
@@ -67,29 +73,36 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.black),
+                  icon: const Icon(Icons.arrow_back,
+                      size: 30, color: AppColors.accent),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
-                if (user != null)
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundImage:
-                            ImageService.getUserAvatar(user!['images']),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        user!['name'] ?? '',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  )
-                else
+                if (user != null) ...[
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundImage:
+                        ImageService.getUserAvatar(user!['images']),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    user!['name'] ?? '',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.close,
+                        size: 30, color: AppColors.accent),
+                    onPressed: () async {
+                      await encounterService.deleteEncounter(user!['id']);
+                      Navigator.of(context).pop();
+                      await loadReceiverUserData();
+                    },
+                  ),
+                ] else
                   const CircularProgressIndicator(),
               ],
             ),

@@ -79,9 +79,11 @@ class PeopleScreenState extends State<PeopleScreen> {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.close, color: Colors.red),
-                        onPressed: () {
-                          // Acción para rechazar
+                        onPressed: () async {
+                          // Acción para cancelar encounter
+                          await encounterService.deleteEncounter(user['id']);
                           Navigator.of(context).pop();
+                          await loadEncounteredUsers();
                         },
                       ),
                       Text(
@@ -94,6 +96,7 @@ class PeopleScreenState extends State<PeopleScreen> {
                           // Acción para hacer match
                           await encounterService.markAsMatched(user['id']);
                           Navigator.of(context).pop();
+                          await loadEncounteredUsers();
                         },
                       ),
                     ],

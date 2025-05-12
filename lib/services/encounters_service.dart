@@ -71,4 +71,15 @@ class EncountersService {
         .doc(encounterId)
         .update({'matched': true});
   }
+
+  Future<void> deleteEncounter(String otherUserId) async {
+    final myUserId = FirebaseAuth.instance.currentUser!.uid;
+    List<String> sortedIds = [myUserId, otherUserId]..sort();
+    String encounterId = sortedIds.join("_");
+
+    await FirebaseFirestore.instance
+        .collection('encounters')
+        .doc(encounterId)
+        .delete();
+  }
 }

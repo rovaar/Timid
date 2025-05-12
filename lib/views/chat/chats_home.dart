@@ -73,8 +73,14 @@ class _ChatsHomeScreenState extends State<ChatsHomeScreen> {
                         backgroundImage:
                             ImageService.getUserAvatar(user['images']),
                       ),
-                      title: Text(user['name'] ?? 'Sin nombre'),
-                      subtitle: Text(user['email'] ?? ''),
+                      title: Text(user['name'] ?? 'Sin nombre',
+                          style: const TextStyle(
+                            color: Colors.white,
+                          )),
+                      subtitle: Text(user['email'] ?? '',
+                          style: const TextStyle(
+                            color: Colors.white,
+                          )),
                       onTap: () {
                         Navigator.push(
                           context,
