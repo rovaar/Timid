@@ -15,6 +15,8 @@ class EncountersService {
       'matched': false,
       'timestamp': FieldValue.serverTimestamp(),
     });
+
+    print("Nou registre a la BD: {$encounterId}");
   }
 
   Future<List<String>> getEncounterUserIds(String myUserId) async {
