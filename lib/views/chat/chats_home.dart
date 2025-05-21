@@ -40,10 +40,10 @@ class _ChatsHomeScreenState extends State<ChatsHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopNavBar(
-        text: "Chats",
+        text: "Xats",
       ),
       body: matchedUserIds.isEmpty
-          ? const Center(child: Text("No tienes matches aún"))
+          ? const Center(child: Text("Encara no tens matches"))
           : StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection('users').snapshots(),
@@ -73,7 +73,7 @@ class _ChatsHomeScreenState extends State<ChatsHomeScreen> {
                         backgroundImage:
                             ImageService.getUserAvatar(user['images']),
                       ),
-                      title: Text(user['name'] ?? 'Sin nombre',
+                      title: Text(user['name'] ?? 'Sense Nom',
                           style: const TextStyle(
                             color: Colors.white,
                           )),

@@ -75,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             TextField(
               controller: descriptionController,
               decoration: InputDecoration(
-                labelText: "Descripción",
+                labelText: "Descripció",
                 border: OutlineInputBorder(),
               ),
               maxLines: 3,

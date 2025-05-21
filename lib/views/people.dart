@@ -138,14 +138,14 @@ class PeopleScreenState extends State<PeopleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: TopNavBar(
-          text: "People",
+          text: "Persones",
           icon: Icons.logout,
           onPressed: logout,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: encounteredUsers.isEmpty
-              ? const Center(child: Text("No encountered users yet."))
+              ? const Center(child: Text("Encara no has trobat cap usuari."))
               : GridView.count(
                   crossAxisCount: 3,
                   crossAxisSpacing: 16.0,

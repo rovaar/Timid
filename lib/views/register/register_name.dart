@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:timid/views/register/register_birth.dart';
 import 'package:timid/widgets/button_global.dart';
 import 'package:timid/services/user_service.dart';
+import 'package:timid/widgets/customTextField.dart';
 
 class RegisterName extends StatefulWidget {
   const RegisterName({super.key});
@@ -40,28 +41,27 @@ class _CreateProfileState extends State<RegisterName> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '¿Cuál es tu nombre?',
+                    'Quin és el seu nom?',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 35),
-                  TextFormField(
+                  CustomTextField(
                     controller: userNameController,
-                    decoration:
-                        InputDecoration(hintText: 'Introduce tu nombre'),
+                    label: 'Introdueix el teu nom',
                   ),
                   const SizedBox(height: 20),
-                  Text('Así es como se mostrará en tu perfil.'),
+                  Text('Així és com apareixerà al seu perfil'),
                 ],
               ),
             ),
             const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 40),
-              child: ButtonGlobal(text: 'Siguiente', onPressed: goToNextPage),
+              child: ButtonGlobal(text: 'Següent', onPressed: goToNextPage),
             ),
           ],
         ),

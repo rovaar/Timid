@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timid/services/user_service.dart';
+import 'package:timid/theme/global_colors.dart';
 import 'dart:io';
 import 'package:timid/views/home.dart';
 import 'package:timid/widgets/button_global.dart';
@@ -42,7 +43,7 @@ class _RegisterPhotosState extends State<RegisterPhotos> {
 
     if (selectedImagesCount < 3) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Debes subir al menos 3 imágenes')),
+        SnackBar(content: Text('Has de pujar almenys 3 imatges')),
       );
       return;
     }
@@ -78,7 +79,7 @@ class _RegisterPhotosState extends State<RegisterPhotos> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Selecciona entre 3 y 6 fotos para tu perfil:",
+                    "Selecciona entre 3 i 6 fotos per al teu perfil:",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 20),
@@ -97,7 +98,7 @@ class _RegisterPhotosState extends State<RegisterPhotos> {
                         onTap: () => pickImage(index),
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: images[index] != null
@@ -116,7 +117,7 @@ class _RegisterPhotosState extends State<RegisterPhotos> {
                                       right: 0,
                                       child: IconButton(
                                         icon: Icon(Icons.cancel,
-                                            color: Colors.red),
+                                            color: AppColors.redHeart),
                                         onPressed: () => removeImage(index),
                                       ),
                                     ),
@@ -124,7 +125,7 @@ class _RegisterPhotosState extends State<RegisterPhotos> {
                                 )
                               : Center(
                                   child: Icon(Icons.add_a_photo,
-                                      size: 40, color: Colors.grey),
+                                      size: 40, color: Colors.white),
                                 ),
                         ),
                       );

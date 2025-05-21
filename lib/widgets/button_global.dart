@@ -4,11 +4,15 @@ import 'package:timid/theme/global_colors.dart';
 class ButtonGlobal extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final Color? backgroundColor;
+  final Color? textColor;
 
   const ButtonGlobal({
     super.key,
     required this.text,
     required this.onPressed,
+    this.backgroundColor,
+    this.textColor,
   });
 
   @override
@@ -17,7 +21,7 @@ class ButtonGlobal extends StatelessWidget {
       width: 200,
       height: 50,
       decoration: BoxDecoration(
-        color: AppColors.accent,
+        color: backgroundColor ?? AppColors.accent,
         borderRadius: BorderRadius.circular(50),
       ),
       child: ElevatedButton(
@@ -28,7 +32,7 @@ class ButtonGlobal extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: const TextStyle(fontSize: 18, color: Colors.white),
+          style: TextStyle(fontSize: 18, color: textColor ?? Colors.white),
         ),
       ),
     );

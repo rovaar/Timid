@@ -4,6 +4,7 @@ import 'package:timid/theme/global_colors.dart';
 import 'package:timid/views/register/login.dart';
 import 'package:timid/views/register/register_name.dart';
 import 'package:timid/widgets/button_global.dart';
+import 'package:timid/widgets/customTextField.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -56,71 +57,38 @@ class SignUpState extends State<SignUp> {
                       const Text(
                         'TIMID',
                         style: TextStyle(
-                          fontSize: 35,
+                          fontSize: 45,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Image.asset(
                         'assets/images/LogoTimid.png',
-                        width: 45,
-                        height: 45,
+                        width: 55,
+                        height: 55,
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 150),
-                Text('Create a new account',
+                Text('Crea un compte nou',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w500,
                     )),
                 const SizedBox(height: 50),
-                TextFormField(
+                CustomTextField(
                   controller: emailController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.white70),
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
+                  label: 'Email',
                 ),
                 const SizedBox(height: 50),
-                TextFormField(
+                CustomTextField(
                   controller: passwordController,
-                  obscureText: true,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Contrassenya',
-                    labelStyle: TextStyle(color: Colors.white70),
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
+                  label: 'Contrassenya',
                 ),
                 const SizedBox(height: 30),
                 Center(
                   child: ButtonGlobal(
-                    text: "Sign up",
+                    text: "Registra’t",
                     onPressed: signUp,
                   ),
                 ),
@@ -128,7 +96,7 @@ class SignUpState extends State<SignUp> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("You already have an account?"),
+                      const Text("Ja tens un compte?"),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -138,7 +106,7 @@ class SignUpState extends State<SignUp> {
                           );
                         },
                         child: const Text(
-                          "Sign in",
+                          "Inicia sessió",
                           style: TextStyle(
                               color: AppColors.accent,
                               fontWeight: FontWeight.bold),

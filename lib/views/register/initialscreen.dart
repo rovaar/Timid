@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timid/theme/global_colors.dart';
 import 'package:timid/views/register/login.dart';
 import 'package:timid/views/register/signup.dart';
 import 'package:timid/widgets/button_global.dart';
@@ -40,12 +41,12 @@ class InitialscreenState extends State<Initialscreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Image.asset(
-                      'assets/images/LogoText.png',
-                      width: 150,
-                      height: 150,
+                      'assets/images/LogoTimid.png',
+                      width: 200,
+                      height: 200,
                     ),
                   ),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 40),
                   Text(
                     'Benveniguts a Timid!',
                     style: TextStyle(
@@ -56,21 +57,22 @@ class InitialscreenState extends State<Initialscreen> {
                   ),
                 ],
               ),
-              const Spacer(),
               Column(
                 children: [
                   ButtonGlobal(
-                    text: "Sign up",
-                    onPressed: signUp,
+                    text: "Iniciar Sessió",
+                    onPressed: signIn,
                   ),
                   const SizedBox(height: 20),
                   ButtonGlobal(
-                    text: "Sign in",
-                    onPressed: signIn,
+                    text: "Registrar-se",
+                    onPressed: signUp,
+                    backgroundColor: AppColors.background,
+                    textColor: AppColors.accent,
                   ),
                 ],
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 80),
             ],
           ),
         ),

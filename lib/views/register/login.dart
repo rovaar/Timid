@@ -3,6 +3,7 @@ import 'package:timid/services/auth_service.dart';
 import 'package:timid/views/home.dart';
 import 'package:timid/views/register/signup.dart';
 import 'package:timid/widgets/button_global.dart';
+import 'package:timid/widgets/customTextField.dart';
 import 'package:timid/theme/global_colors.dart';
 
 class Login extends StatefulWidget {
@@ -55,20 +56,20 @@ class LoginState extends State<Login> {
                       const Text(
                         'TIMID',
                         style: TextStyle(
-                          fontSize: 35,
+                          fontSize: 45,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Image.asset(
                         'assets/images/LogoTimid.png',
-                        width: 45,
-                        height: 45,
+                        width: 55,
+                        height: 55,
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 150),
-                Text('Login to your account',
+                Text('Inicia sessió al teu compte',
                     style: TextStyle(
                       //color: AppColors.accent,
                       color: Colors.white,
@@ -76,52 +77,19 @@ class LoginState extends State<Login> {
                       fontWeight: FontWeight.w500,
                     )),
                 const SizedBox(height: 50),
-                TextFormField(
+                CustomTextField(
                   controller: emailController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.white70),
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
+                  label: 'Email',
                 ),
                 const SizedBox(height: 50),
-                TextFormField(
+                CustomTextField(
                   controller: passwordController,
-                  obscureText: true,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    labelText: 'Contrassenya',
-                    labelStyle: TextStyle(color: Colors.white70),
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
+                  label: 'Contrassenya',
                 ),
                 const SizedBox(height: 30),
                 Center(
                   child: ButtonGlobal(
-                    text: "Sign in",
+                    text: "Inicia sessió",
                     onPressed: signIn,
                   ),
                 ),
@@ -129,7 +97,7 @@ class LoginState extends State<Login> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Don't have an account?"),
+                      const Text("No tens un compte?"),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -139,7 +107,7 @@ class LoginState extends State<Login> {
                           );
                         },
                         child: const Text(
-                          "Sign up",
+                          "Registra't",
                           style: TextStyle(
                               color: AppColors.accent,
                               fontWeight: FontWeight.bold),

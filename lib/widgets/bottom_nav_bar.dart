@@ -17,9 +17,9 @@ class BottomNavBar extends StatelessWidget {
       unselectedItemColor: AppColors.primary,
       showUnselectedLabels: false,
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'People'),
-        BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chats'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Persones'),
+        BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Xats'),
       ],
     );
   }

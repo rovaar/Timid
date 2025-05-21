@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timid/services/user_service.dart';
+import 'package:timid/theme/global_colors.dart';
 import 'package:timid/views/register/register_gender.dart';
 import 'package:timid/widgets/button_global.dart';
 
@@ -56,32 +57,47 @@ class _RegisterBirthState extends State<RegisterBirth> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '¿Cuándo es tu cumpleaños?',
+                    'Quan és el seu aniversari??',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 35),
-                  TextField(
+                  TextFormField(
                     controller: userBirthController,
                     readOnly: true,
-                    decoration: InputDecoration(
-                      hintText: 'Selecciona tu fecha de nacimiento',
-                      suffixIcon: Icon(Icons.calendar_today),
-                    ),
                     onTap: () => selectDate(context),
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
+                      labelText: 'Data de naixement',
+                      labelStyle: TextStyle(color: Colors.white70),
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
+                      suffixIcon:
+                          Icon(Icons.calendar_today, color: AppColors.accent),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 20),
-                  Text('Así es como se mostrará en tu perfil.'),
+                  Text('Així és com apareixerà al seu perfil')
                 ],
               ),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 40),
                   child: ButtonGlobal(
-                    text: 'Siguiente',
+                    text: 'Següent',
                     onPressed: goToNextPage,
                   ),
                 ),
